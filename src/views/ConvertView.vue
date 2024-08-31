@@ -24,7 +24,7 @@
       </div>
 
       <div class="convertPage__content__input">
-        <input type="number" v-model="secondValue.number"/>
+        <input type="number" v-model="secondValue.number" @input="ifChangedConversation('second')"/>
         <div class="convertPage__content__input__box"  v-click-outside="closeSecond">
           <div class="convertPage__content__input__box-main" @click="secondValue.opener = !firstValue.opener">
             <p>{{ secondValue.selected }}</p>
@@ -50,11 +50,11 @@ export default {
     return {
       firstValue: {
         number: 0,
-        selected: 'rub'
+        selected: 'usd'
       },
       secondValue: {
         number: 0,
-        selected: 'usd'
+        selected: 'rub'
       }
     }
   },
@@ -94,10 +94,11 @@ export default {
     selectCurrency(type, value) {
       if (type === 'first') {
         this.firstValue.selected = value;
-      } else {
+      } 
+      else {
         this.secondValue.selected = value;
       }
-      this.ifChangedConversation(type);
+      this.ifChangedConversation('first');
     },
     swapCurrencies() {
       [this.firstValue.selected, this.secondValue.selected] = [this.secondValue.selected, this.firstValue.selected];
